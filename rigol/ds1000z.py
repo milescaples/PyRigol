@@ -1,4 +1,4 @@
-class Ds1000z:
+class Ds1000z():
     def __init__(self, visa_resource):
         self.visa_resource = visa_resource
 
