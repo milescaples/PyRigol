@@ -31,6 +31,6 @@ class Ds1000z():
         self.visa_write(':WAV:MODE NORM')
         self.visa_write(':WAV:FORM ASC')
         raw_data = self.visa_ask_raw(':WAV:DATA?')[2+9:]
-        with open(filename, 'wb') as f:
+        with open(filename, 'w') as f:
             for item in raw_data:
                 f.write(item)
