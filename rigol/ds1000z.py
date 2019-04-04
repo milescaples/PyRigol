@@ -22,6 +22,6 @@ class Ds1000z():
         return self.visa_ask('*IDN?')
 
     def get_screenshot(self, filename=None, format='png'):
-        raw_img = self.visa_ask_raw(':DISP:DATA? ON,OFF,PNG',3850780)
+        raw_img = self.visa_ask_raw(':DISP:DATA? ON,OFF,PNG')[2+9:]
         with open(filename, 'wb') as f:
             f.write(raw_img)
