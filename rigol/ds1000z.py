@@ -33,4 +33,4 @@ class Ds1000z():
         raw_data = self.visa_ask_raw(':WAV:DATA?')[2+9:]
         with open(filename, 'w') as f:
             for item in raw_data:
-                f.write(item)
+                f.write(str(item))
