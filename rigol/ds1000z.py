@@ -44,8 +44,8 @@ class Ds1000z():
         with open(filename, 'wb') as f:
             f.write(raw_img)
     
-    def get_data(self, filename=None):
-        self.visa_write(':WAV:SOUR: CHAN1')
+    def get_data(self, filename=None, channel=1):
+        self.visa_write(':WAV:SOUR: CHAN{}'.format(channel))
         self.visa_write(':WAV:MODE NORM')
         self.visa_write(':WAV:FORM ASC')
         raw_data = self.visa_ask_raw(':WAV:DATA?')[2+9:]
