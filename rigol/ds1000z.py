@@ -1,6 +1,20 @@
+class _Channel():
+    def __init__(self, channel, osc):
+        self._channel = channel
+        self._osc = osc
+    
+    def get_data(self, mode='norm', filename=None):
+        self._osc.visa_write(':stop')
+        self._osc.visa_write(':wav:sour chan{}'.format(self._channel))
+        self._osc.visa_write(':wav:mode {}'.format(mode))
+        self._osc.visa_write(':wav:form asc')
+        data = self._osc.visa_ask_raw(':wav:data?')[11:]
+        return data
+
 class Ds1000z():
     def __init__(self, visa_resource):
         self.visa_resource = visa_resource
+        self._channels = [_Channel(c, self) for c in range(1,5)]
 
     def visa_write(self, cmd):
         self.visa_resource.write(cmd)
