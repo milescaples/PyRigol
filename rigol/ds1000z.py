@@ -12,9 +12,13 @@ class _Channel():
         return data
 
 class Ds1000z():
-    def __init__(self, visa_resource):
+    def __init__(self, visa_resource):  
         self.visa_resource = visa_resource
         self._channels = [_Channel(c, self) for c in range(1,5)]
+    
+    def __getitem__(self, i):
+        assert 1 <= i <= 4, 'Not a valid channel.'
+        return self._channels[i-1]
 
     def visa_write(self, cmd):
         self.visa_resource.write(cmd)
